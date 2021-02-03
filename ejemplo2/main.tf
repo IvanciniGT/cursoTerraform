@@ -32,7 +32,7 @@ resource "docker_container" "contenedores-nginx-iguales" {
 }
 
 resource "docker_container" "contenedores-nginx-diferentes" {
-  for_each = var.nombre_contenedores
+  for_each = var.contenedores
   # La variable each me da: each.key y un each.value
   name  = each.key
   image = docker_image.imagen-nginx.latest
@@ -40,6 +40,13 @@ resource "docker_container" "contenedores-nginx-diferentes" {
     internal = 80
     external = each.value 
   }
+}
+
+resource "docker_container" "contenedores-nginx-diferentes-nombres" {
+  for_each = toset(var.nombre_contenedores)
+  # La variable each me da: each.key y un each.value
+  name  = each.key
+  image = docker_image.imagen-nginx.latest
 }
 
 resource "docker_image" "imagen-nginx" {
