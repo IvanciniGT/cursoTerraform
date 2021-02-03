@@ -24,12 +24,12 @@ variable "contenedores_muy_diferentes" {
     description = "Contendores nginx"
     type        = map(map(string))
     default     = {
-        contenedorA  = {
+        VERDE  = {
             puerto         = 8090    
             host_path      = "/home/ubuntu/environment/cursoTerraform"
             container_path = "/cursoTerraform"
         }
-        contenedorB  = {
+        AMARILLO  = {
             puerto         = 8091  
             container_path = "/ivan"
             host_path      = "/home/ubuntu/environment/ivan"

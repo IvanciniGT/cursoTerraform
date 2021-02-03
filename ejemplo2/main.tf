@@ -42,6 +42,23 @@ resource "docker_container" "contenedores-nginx-diferentes" {
   }
 }
 
+
+resource "docker_container" "contenedores-nginx-muy-diferentes" {
+  for_each = var.contenedores_muy_diferentes
+  # La variable each me da: each.key y un each.value
+  name  = each.key
+  image = docker_image.imagen-nginx.latest
+  ports {
+    internal = 80
+    external = each.value["puerto"]
+  }
+  volumes {
+    host_path      = each.value["host_path"]
+    container_path = each.value["container_path"]
+  }
+}
+
+
 resource "docker_container" "contenedores-nginx-diferentes-nombres" {
   for_each = toset(var.nombre_contenedores)
   # La variable each me da: each.key y un each.value
