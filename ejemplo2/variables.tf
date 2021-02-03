@@ -37,23 +37,23 @@ variable "contenedores_muy_diferentes" {
     }
 }
 
-
 variable "nombre_contenedores" {
     description = "Contendores nginx"
     type        = list(string)
     default     = [ "Rojo", "Azul" ]
 }
-#variable "contenedores" {
-#    description = "Contendores nginx"
-#    type        = list(map(string))
-#    default     = [
-#        {
-#            nombre      = "contenedorA"
-#            puerto      = "8090"
-#        },
-#        {
-#            nombre      = "contenedorB"
-#            puerto      = "8091"
-#        }
-#    ]
-#}
+
+variable "lista_contenedores" {
+    description = "Contendores nginx"
+    type        = list(map(string))
+    default     = [
+        {
+            nombre      = "ListaA"
+            puerto      = "9090"
+        },
+        {
+            nombre      = "ListaB"
+            puerto      = "9091"
+        }
+    ]
+}

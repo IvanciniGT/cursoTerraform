@@ -31,6 +31,7 @@ resource "docker_container" "contenedores-nginx-iguales" {
   }
 }
 
+
 resource "docker_container" "contenedores-nginx-diferentes" {
   for_each = var.contenedores
   # La variable each me da: each.key y un each.value
@@ -66,7 +67,18 @@ resource "docker_container" "contenedores-nginx-diferentes-nombres" {
   image = docker_image.imagen-nginx.latest
 }
 
+
+resource "docker_container" "contenedores-nginx-lista" {
+  count = length(var.lista_contenedores)
+  name  = var.lista_contenedores[count.index]["nombre"]
+  image = docker_image.imagen-nginx.latest
+  ports {
+    internal = 80
+    external = var.lista_contenedores[count.index].puerto
+  }
+}
+
+
 resource "docker_image" "imagen-nginx" {
   name = "${var.nombre_imagen}:${var.version_imagen}"
 }
-
