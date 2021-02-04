@@ -14,6 +14,16 @@ provider "docker" { }
 resource "docker_container" "contenedor" {
   name  = var.nombre_contenedor
   image = docker_image.imagen.latest
+  
+   dynamic "ports" {
+    for_each = var.puertos
+    content {
+        internal        = ports.value["interno"]
+        external        = ports.value["externo"]
+        protocol        = ports.value["protocolo"]
+    }
+  }
+  
 }
 
          #docker_image.  imagen.

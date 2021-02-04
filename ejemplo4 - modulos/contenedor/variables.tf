@@ -4,6 +4,11 @@ variable "nombre_contenedor" {
     type        = string
 }
 
+variable "puertos" {
+    description = "Nombre de la imagen que voy a descargar"
+    type        = list(map(string))
+}
+
 variable "nombre_imagen" {
     description = "Nombre de la imagen que voy a descargar"
     type        = string

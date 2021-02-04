@@ -9,7 +9,44 @@ terraform {
 
 
 module "nginx" {
+    source              = "./contenedor"
+    nombre_imagen       = "nginx"
+    nombre_contenedor   = "mi-nginx"
+    puertos = [
+        {
+          interno = 80
+          externo = 8080
+          protocolo = "tcp"
+        },
+        {
+          interno = 443
+          externo = 8443
+          protocolo = "tcp"
+        }
+    ]
+# Puertos: 
+    #  - Puede exponer varios puertos
+    #  - Para cada puerto que exponga, voy a dar también el puerto en el que lo mapeo
+    # 80  http  -> 8080
+    # 443 https -> 8081
+    #puertos             = [ [80,8080], [443,8081 ]]
+    #puertos             = { "80" = "8080", "443" = "8081"}
+   }
+
+module "apache" {
     source  = "./contenedor"
-    nombre_imagen = "nginx"
-    nombre_contenedor = "mi-nginx"
+    nombre_imagen = "httpd"
+    nombre_contenedor = "mi-apache"
+    puertos = [
+        {
+          interno = 80
+          externo = 8081
+          protocolo = "tcp"
+        },
+        {
+          interno = 443
+          externo = 8444
+          protocolo = "tcp"
+        }
+    ]
 }
