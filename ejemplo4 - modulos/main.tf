@@ -12,18 +12,7 @@ module "nginx" {
     source              = "./contenedor"
     nombre_imagen       = "nginx"
     nombre_contenedor   = "mi-nginx"
-    puertos = [
-        {
-          interno = 80
-          externo = 8080
-          protocolo = "tcp"
-        },
-        {
-          interno = 443
-          externo = 8443
-          protocolo = "tcp"
-        }
-    ]
+    puertos             = var.puertos_nginx
 # Puertos: 
     #  - Puede exponer varios puertos
     #  - Para cada puerto que exponga, voy a dar también el puerto en el que lo mapeo
@@ -34,19 +23,20 @@ module "nginx" {
    }
 
 module "apache" {
-    source  = "./contenedor"
-    nombre_imagen = "httpd"
-    nombre_contenedor = "mi-apache"
-    puertos = [
-        {
-          interno = 80
-          externo = 8081
-          protocolo = "tcp"
-        },
-        {
-          interno = 443
-          externo = 8444
-          protocolo = "tcp"
-        }
-    ]
+    source              = "./contenedor"
+    nombre_imagen       = "httpd"
+    version_imagen      = "2.4.46"
+    nombre_contenedor   = "mi-apache"
+    puertos             = [
+                            {
+                              interno = 80
+                              externo = 8081
+                              protocolo = "tcp"
+                            },
+                            {
+                              interno = 443
+                              externo = 8444
+                              protocolo = "tcp"
+                            }
+                        ]
 }
