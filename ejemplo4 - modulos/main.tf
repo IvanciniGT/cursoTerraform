@@ -8,6 +8,8 @@ terraform {
 }
 
 
-module "mysql" {
+module "nginx" {
     source  = "./contenedor"
+    nombre_imagen = "nginx"
+    nombre_contenedor = "mi-nginx"
 }

@@ -12,7 +12,7 @@ provider "docker" { }
     Me estoy creando un contenedor
 */
 resource "docker_container" "contenedor" {
-  name  = "mi_contenedor"
+  name  = var.nombre_contenedor
   image = docker_image.imagen.latest
 }
 
