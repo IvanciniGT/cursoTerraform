@@ -19,14 +19,14 @@ resource "aws_instance" "mi-maquina" {
     key_name      = aws_key_pair.mis_claves.key_name # Se genera la relacion de dependencia
 #    key_name      = "claves_instancia_ivan"          # NO se genera la relacion de dependencia
     
-    security_group = [
+    security_groups = [
         aws_security_group.reglas_red.name
     ]
     tags          = {
         Name      = "Instancia_Ivan"
     }
     
-    provisioner "remote_exec" {
+    provisioner "remote-exec" {
         inline = [
                     "sudo apt update",
                     "sudo apt install docker -y"
@@ -58,7 +58,8 @@ resource "aws_key_pair" "mis_claves" {
 
 
 resource "aws_security_group" "reglas_red" {
-    name    = "Permitir acceso a la máquinas"
+    name    = "reglas_red"
+    description    = "Permitir acceso a la maquinas"
     
     ingress {
         from_port = 22
