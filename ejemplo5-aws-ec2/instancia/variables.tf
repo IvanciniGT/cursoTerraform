@@ -8,6 +8,7 @@ variable "tipo_instancia" {
     description = "Tipo de instancia que voy a generar"
     type        = string
     default     = "t2.micro"
+#    sensitive   = True
 }
 
 variable "ami" {
