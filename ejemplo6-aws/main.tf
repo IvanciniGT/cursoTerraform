@@ -28,8 +28,10 @@ resource "aws_instance" "mi-maquina" {
     
     provisioner "remote-exec" {
         inline = [
+#                    "sleep 20", 
                     "sudo apt update",
-                    "sudo apt install docker -y"
+#                    "sudo apt install docker -y"
+                    "docker run -p 8080:80 -d nginx"
                  ]
         
         connection {
@@ -58,12 +60,18 @@ resource "aws_key_pair" "mis_claves" {
 
 
 resource "aws_security_group" "reglas_red" {
-    name    = "reglas_red"
+    name    = "reglas_red_ivan"
     description    = "Permitir acceso a la maquinas"
     
     ingress {
         from_port = 22
         to_port   = 22
+        protocol  = "tcp"
+        cidr_blocks = [ "0.0.0.0/0" ]
+    }
+    ingress {
+        from_port = 8080
+        to_port   = 8080
         protocol  = "tcp"
         cidr_blocks = [ "0.0.0.0/0" ]
     }
